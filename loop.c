@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx.h                                              :+:      :+:    :+:   */
+/*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/05 19:42:12 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/06 16:57:50 by junhyeop         ###   ########.fr       */
+/*   Created: 2024/02/06 17:55:36 by junhyeop          #+#    #+#             */
+/*   Updated: 2024/02/06 18:29:42 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLX_H
-# define MLX_H
+#include <mlx.h>
 
-# include <mlx.h>
-# include <math.h>
 
-typedef struct s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
+int render_next_frame(void *YourStruct);
 
-#endif
+int main(void)
+{
+	void	*mlx;
+
+	mlx = mlx_init();
+	mlx_loop_hook(mlx, render_next_frame, YourStruct);
+	mlx_loop(mlx);
+}
