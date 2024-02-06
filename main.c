@@ -6,12 +6,12 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 19:27:26 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/06 18:17:26 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/06 20:52:13 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <mlx.h>
+#include "./mlx/mlx.h"
 #include <stdlib.h>
 
 // mlx 구조체
