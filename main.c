@@ -6,29 +6,11 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 19:27:26 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/06 20:52:13 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/12 21:29:12 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "./mlx/mlx.h"
-#include <stdlib.h>
-
-// mlx 구조체
-typedef struct	s_vars {
-	void		*mlx;
-	void		*win;
-}				t_vars;
-
-// image data 구조체
-typedef struct s_data
-{
-	void 	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}		t_data;
+#include "so_long.h"
 
 //함수 선언부
 void my_mlx_pixel_put(t_data *data, int x, int y, int color);
