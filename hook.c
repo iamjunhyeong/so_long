@@ -6,11 +6,12 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 17:43:00 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/06 21:22:51 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/12 21:52:53 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./mlx/mlx.h"
+#include "so_long.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -23,27 +24,7 @@
 # define KEY_S			1
 # define KEY_D			2
 
-// mlx 구조체
-typedef struct	s_vars {
-	void		*mlx;
-	void		*win;
-}				t_vars;
 
-// image data 구조체
-typedef struct s_data
-{
-	void 	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}		t_data;
-
-typedef struct s_param
-{
-	int	x;
-	int	y;
-}	t_param;
 
 void	param_init(t_param *param)
 {
@@ -70,9 +51,8 @@ int	key_press(int keycode, t_param *param)
 	return (0);
 }
 
-int main(void)
+int hook(t_vars *vars,)
 {
-	t_vars	vars;
 	t_param	param;
 
 	param_init(&param);
