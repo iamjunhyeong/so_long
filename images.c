@@ -6,42 +6,66 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 21:45:08 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/06 21:45:45 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/12 21:51:55 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./mlx/mlx.h"
+#include "so_long.h"
+#define BIT	32
 
-int main()
+void	put_img(t_vars *vars, t_img *img, char map[][50])
 {
-	void *mlx;
-	void *win;
-	void *img;
-	void *img2;
-	void *img3;
-	void *img4;
-	void *img5;
-	void *img6;
-	void *img7;
-	int img_width;
-	int img_height;
+	int	i;
+	int	j;
 
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 500, 500, "my_mlx");
-	img = mlx_xpm_file_to_image(mlx, "./images/land.xpm", &img_width, &img_height);
-	img2 = mlx_xpm_file_to_image(mlx, "./images/wall.xpm", &img_width, &img_height);
-	img3 = mlx_xpm_file_to_image(mlx, "./images/chara.xpm", &img_width, &img_height);
-	img4 = mlx_xpm_file_to_image(mlx, "./images/chest.xpm", &img_width, &img_height);
-	img5 = mlx_xpm_file_to_image(mlx, "./images/chest_open.xpm", &img_width, &img_height);
-	img6 = mlx_xpm_file_to_image(mlx, "./images/rune.xpm", &img_width, &img_height);
-	img7 = mlx_xpm_file_to_image(mlx, "./images/rune_light.xpm", &img_width, &img_height);
-	mlx_put_image_to_window(mlx, win, img, 0, 0);
-	mlx_put_image_to_window(mlx, win, img2, 64, 0);
-	mlx_put_image_to_window(mlx, win, img3, 128, 0);
-	mlx_put_image_to_window(mlx, win, img4, 192, 64);
-	mlx_put_image_to_window(mlx, win, img5, 0, 64);
-	mlx_put_image_to_window(mlx, win, img6, 64, 64);
-	mlx_put_image_to_window(mlx, win, img7, 128, 64);
-	mlx_loop(mlx);
+	i = 0;
+	while (i < 50 && map[i][j] != -1)
+	{
+		j = 0;
+		while (j < 50 && map[i][j] != -1)
+		{
+			if (map[i][j] == '0')
+				mlx_put_image_to_window(vars->mlx, vars->win, img->img1, BIT * j, BIT * i);
+			else if (map[i][j] == '1')
+				mlx_put_image_to_window(vars->mlx, vars->win, img->img2, BIT * j, BIT * i);
+			else if (map[i][j] == 'C')
+				mlx_put_image_to_window(vars->mlx, vars->win, img->img3, BIT * j, BIT * i);
+			else if (map[i][j] == 'E')
+				mlx_put_image_to_window(vars->mlx, vars->win, img->img4, BIT * j, BIT * i);
+			else if (map[i][j] == 'P')
+				mlx_put_image_to_window(vars->mlx, vars->win, img->img6, BIT * j, BIT * i);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	set_img(t_vars *vars, t_img *img, char map[][50])
+{
+	img->img1 = mlx_xpm_file_to_image(vars->mlx, "./images/black.xpm", &img->img_width, &img->img_height);
+	img->img2 = mlx_xpm_file_to_image(vars->mlx, "./images/wall.xpm", &img->img_width, &img->img_height);
+	img->img3 = mlx_xpm_file_to_image(vars->mlx, "./images/pacdot_food.xpm", &img->img_width, &img->img_height);
+	img->img4 = mlx_xpm_file_to_image(vars->mlx, "./images/portal.xpm", &img->img_width, &img->img_height);
+	img->img5 = mlx_xpm_file_to_image(vars->mlx, "./images/B/ghost_left1.xpm", &img->img_width, &img->img_height);
+	img->img6 = mlx_xpm_file_to_image(vars->mlx, "./images/pac_open_right.xpm", &img->img_width, &img->img_height);
+
+	put_img(vars, img, map);
+}
+
+int main(void)
+{
+	char	map[50][50];
+	t_img	img;
+	t_vars	vars;
+
+	img.img_width = 1920;
+	img.img_height = 1080;
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx, img.img_width, img.img_height, "Hellow World!");
+	set_map(map);
+	set_img(&vars, &img, map);
+
+	mlx_hook(vars.win, X_EVENT_KEY_RELEASE, 0, &key_press, &param);
+	mlx_loop(vars.mlx);
 	return (0);
 }
