@@ -6,13 +6,11 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 17:43:00 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/12 21:52:53 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/12 22:27:08 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./mlx/mlx.h"
 #include "so_long.h"
-#include <stdlib.h>
 #include <stdio.h>
 
 # define X_EVENT_KEY_PRESS			2
@@ -24,12 +22,23 @@
 # define KEY_S			1
 # define KEY_D			2
 
-
-
-void	param_init(t_param *param)
+void	param_init(t_param *param, char map[][50])
 {
-	param->x = 3;
-	param->y = 4;
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (i < 50)
+	{
+		while (j < 50 && map[i][j] != 'P')
+			j++;
+		if (map[i][j] == 'P')
+			break ;
+		i++;
+	}
+	param->x = i;
+	param->y = j;
 }
 
 int	key_press(int keycode, t_param *param)
@@ -51,13 +60,12 @@ int	key_press(int keycode, t_param *param)
 	return (0);
 }
 
-int hook(t_vars *vars,)
+void	hook(t_vars *vars, t_img *img, char map[][50])
 {
 	t_param	param;
 
-	param_init(&param);
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 640, 480, "mlx_pj");
-	mlx_hook(vars.win, X_EVENT_KEY_RELEASE, 0, &key_press, &param);
-	mlx_loop(vars.mlx);
+	if (!img)
+		return ;
+	param_init(&param, map);
+	mlx_hook(vars->win, X_EVENT_KEY_RELEASE, 0, &key_press, &param);
 }

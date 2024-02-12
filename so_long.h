@@ -20,27 +20,10 @@ typedef struct s_img
 	int img_height;
 }	t_img;
 
-// mlx 구조체
 typedef struct	s_vars {
 	void		*mlx;
 	void		*win;
 }				t_vars;
-
-// image data 구조체
-typedef struct s_data
-{
-	void 	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}		t_data;
-
-typedef struct s_param
-{
-	int	x;
-	int	y;
-}	t_param;
 
 typedef struct s_mapinfo
 {
@@ -53,6 +36,15 @@ typedef struct s_mapinfo
 	int		P;
 }	t_mapinfo;
 
+typedef struct s_param
+{
+	int					x;
+	int					y;
+	struct s_img		*img;
+	struct s_vars		*vars;
+	struct s_mapinfo	*mi;
+}	t_param;
+
 void	set_map(char map[][50]);
 int		check_map(char map[][50]);
 void	map_init(char map[][50]);
@@ -60,5 +52,10 @@ void	create_map(char *s, char map[], t_mapinfo *mi);
 void	print_error(int type);
 void	set_img(t_vars *vars, t_img *img, char map[][50]);
 void	put_img(t_vars *vars, t_img *img, char map[][50]);
+
+void	hook(t_vars *vars, t_img *img, char map[][50]);
+int		key_press(int keycode, t_param *param);
+void	param_init(t_param *param, char map[][50]);
+
 
 #endif

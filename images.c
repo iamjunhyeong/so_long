@@ -6,7 +6,7 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 21:45:08 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/12 21:51:55 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/12 22:17:40 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int main(void)
 	set_map(map);
 	set_img(&vars, &img, map);
 
-	mlx_hook(vars.win, X_EVENT_KEY_RELEASE, 0, &key_press, &param);
+	hook(&vars, &img, map);
+	// mlx_hook(vars.win, X_EVENT_KEY_RELEASE, 0, &key_press, &param);
 	mlx_loop(vars.mlx);
 	return (0);
 }
