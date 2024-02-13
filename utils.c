@@ -6,7 +6,7 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 20:09:35 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/13 21:56:01 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/13 22:03:26 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,14 @@ void	visited_init(char visited[][50], char map[][50])
 	}
 }
 
-int	head_init(t_head *head)
+t_head	*head_init()
 {
-	head = (t_head *)malloc(sizeof(t_head));
-	if (!head)
-		return (0);
-	head->front = NULL;
-	head->size = 0;
-	return (1);
+	t_head	*tmp;
+
+	tmp = (t_head *)malloc(sizeof(t_head));
+	if (!tmp)
+		return (NULL);
+	tmp->front = NULL;
+	tmp->size = 0;
+	return (tmp);
 }

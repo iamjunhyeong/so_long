@@ -6,7 +6,7 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 17:55:36 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/13 21:48:04 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/13 22:22:05 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,13 @@ void	dfs_init(t_dfs *vars)
 	vars->y = 0;
 }
 
-void	dfs(char visited[][50], t_param *param, char map[][50], t_head *head)
+void	dfs(char visited[][50], t_param *param, t_head *head)
 {
 	t_dfs	v;
 
 	dfs_init(&v);
 
 	add_new_node(head, param->x, param->y);
-	ft_printf("hi\n");
 	visited[param->x][param->y] = 1;
 	while (head->size)
 	{
@@ -52,12 +51,16 @@ void	dfs(char visited[][50], t_param *param, char map[][50], t_head *head)
 		while (v.i < 4)
 		{
 			if (!ind_check(v.x + v.dx[v.i]) || !ind_check(v.y + v.dy[v.i]))
-				continue ;
-			if (visited[v.x + v.dx[v.i]][v.y + v.dy[v.i]] || map[v.x + v.dx[v.i]][v.y + v.dy[v.i]] == '1')
-				continue ;
-			add_new_node(head, v.x + v.dx[v.i], v.y + v.dy[v.i]);
-			visited[v.x + v.dx[v.i]][v.y + v.dy[v.i]] = 1;
-			v.i++;
+				v.i++;
+			else if (visited[v.x + v.dx[v.i]][v.y + v.dy[v.i]])
+				v.i++;
+			else
+			{
+				// ft_printf("%d %d\n", v.x + v.dx[v.i], v.y + v.dy[v.i]);
+				add_new_node(head, v.x + v.dx[v.i], v.y + v.dy[v.i]);
+				visited[v.x + v.dx[v.i]][v.y + v.dy[v.i]] = 1;
+				v.i++;
+			}
 		}
 	}
 }
@@ -73,10 +76,12 @@ void	check_visited(char visited[][50])
 		j = 0;
 		while (j < 50)
 		{
-			if (!visited[i][j])
-				print_error(1);
+			ft_printf("%d", visited[i][j]);
+			// if (!visited[i][j])
+			// 	print_error(1);
 			j++;
 		}
+		ft_printf("\n");
 		i++;
 	}
 }
@@ -86,13 +91,13 @@ int	check_map(char map[][50], t_param *param)
 	char	visited[50][50];
 	t_head	*head;
 
-	head = NULL;
 	if (param->E != 1 || param->P != 1 || param->C < 1)
 		print_error(1);
-	if (!head_init(head))
+	head = head_init();
+	if (!head)
 		print_error(2);
 	visited_init(visited, map);
-	dfs(visited, param, map, head);
+	dfs(visited, param, head);
 	check_visited(visited);
 	return (1);
 }

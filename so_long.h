@@ -80,13 +80,12 @@ void	put_img(char map[][50], t_param *param);
 void	print_error(int type);
 
 void	check_visited(char visited[][50]);
-void	dfs(char visited[][50], t_param *param, char map[][50], t_head *head);
+void	dfs(char visited[][50], t_param *param, t_head *head);
 int		ind_check(int ind);
 t_stack	*stack_pop(t_head *head);
 void	add_new_node(t_head *head, int x, int y);
-int		head_init(t_head *head);
+t_head	*head_init();
 void	visited_init(char visited[][50], char map[][50]);
-void	dfs(char visited[][50], t_param *param, char map[][50], t_head *head);
 
 void	hook(t_param *param);
 int		key_press(int keycode, t_param *param);
