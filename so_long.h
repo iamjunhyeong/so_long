@@ -1,61 +1,102 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
+
+# define X_EVENT_KEY_PRESS			2
+# define X_EVENT_KEY_RELEASE		3
+
+# define KEY_ESC					53
+# define KEY_W						13
+# define KEY_A						0
+# define KEY_S						1
+# define KEY_D						2
+# define BIT						32
+
 # include "./mlx/mlx.h"
 # include "./libft/libft.h"
-# include "stdlib.h"
-# include "fcntl.h"
-# include "unistd.h"
+# include <stdlib.h>
+# include <fcntl.h>
+# include <unistd.h>
 
-typedef struct s_img
+typedef struct s_stack
 {
-	void *mlx;
-	void *win;
-	void *img1;
-	void *img2;
-	void *img3;
-	void *img4;
-	void *img5;
-	void *img6;
-	int img_width;
-	int img_height;
-}	t_img;
+	int 			x;
+	int				y;
+	struct s_stack	*next;
+}	t_stack;
 
-typedef struct	s_vars {
-	void		*mlx;
-	void		*win;
-}				t_vars;
-
-typedef struct s_mapinfo
+typedef struct s_dfs
 {
-	char	*str;
+	t_stack	*tmp;
+	int		i;
+	int		x;
+	int		y;
+	int		dx[4];
+	int		dy[4];
+}	t_dfs;
+
+typedef struct s_head
+{
+	int				size;
+	struct s_stack *front;
+}	t_head;
+
+typedef struct s_param
+{
+	char	map[50][50];
+
+	int		ex;
+	int		ey;
+	int		x;
+	int		y;
+	int		move_cnt;
 	int		fd;
 	int		row;
 	int		col;
 	int		C;
 	int		E;
 	int		P;
-}	t_mapinfo;
+	char	*str;
 
-typedef struct s_param
-{
-	int					x;
-	int					y;
-	struct s_img		*img;
-	struct s_vars		*vars;
-	struct s_mapinfo	*mi;
+	void	*mlx;
+	void	*win;
+	void	*img_black;
+	void	*img_wall;
+	void	*img_food;
+	void	*img_portal;
+	void	*img_ghost;
+	void	*img_pacman;
+
+	int		img_width;
+	int		img_height;
 }	t_param;
 
-void	set_map(char map[][50]);
-int		check_map(char map[][50]);
+int		check_map(char map[][50], t_param *param);
+void	param_init(t_param *param);
 void	map_init(char map[][50]);
-void	create_map(char *s, char map[], t_mapinfo *mi);
+void	create_map(char *s, char map[], t_param *param);
 void	print_error(int type);
-void	set_img(t_vars *vars, t_img *img, char map[][50]);
-void	put_img(t_vars *vars, t_img *img, char map[][50]);
+void	set_map(char map[][50], t_param *param);
+void	put_img(char map[][50], t_param *param);
+void	print_error(int type);
 
-void	hook(t_vars *vars, t_img *img, char map[][50]);
+void	check_visited(char visited[][50]);
+void	dfs(char visited[][50], t_param *param, char map[][50], t_head *head);
+int		ind_check(int ind);
+t_stack	*stack_pop(t_head *head);
+void	add_new_node(t_head *head, int x, int y);
+int		head_init(t_head *head);
+void	visited_init(char visited[][50], char map[][50]);
+void	dfs(char visited[][50], t_param *param, char map[][50], t_head *head);
+
+void	hook(t_param *param);
 int		key_press(int keycode, t_param *param);
-void	param_init(t_param *param, char map[][50]);
+void	find_player(t_param *param, char map[][50]);
+void	find_portal(t_param *param, char map[][50]);
+
+void	move_left(t_param *param, char map[][50]);
+void	move_right(t_param *param, char map[][50]);
+void	move_up(t_param *param, char map[][50]);
+void	move_down(t_param *param, char map[][50]);
 
 
 #endif
