@@ -6,7 +6,7 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 21:36:15 by junhyeop          #+#    #+#             */
-/*   Updated: 2023/11/13 17:24:36 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/13 20:11:08 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,3 @@ int	ft_putstr(char *s)
 	return (1);
 }
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	n;
-
-	n = 0;
-	while (s[n] != 0)
-		n++;
-	return (n);
-}
