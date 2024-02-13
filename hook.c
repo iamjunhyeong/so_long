@@ -6,40 +6,11 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 17:43:00 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/12 22:27:08 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/13 20:39:45 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
-
-# define X_EVENT_KEY_PRESS			2
-# define X_EVENT_KEY_RELEASE		3
-
-# define KEY_ESC		53
-# define KEY_W			13
-# define KEY_A			0
-# define KEY_S			1
-# define KEY_D			2
-
-void	param_init(t_param *param, char map[][50])
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (i < 50)
-	{
-		while (j < 50 && map[i][j] != 'P')
-			j++;
-		if (map[i][j] == 'P')
-			break ;
-		i++;
-	}
-	param->x = i;
-	param->y = j;
-}
 
 int	key_press(int keycode, t_param *param)
 {
@@ -47,25 +18,24 @@ int	key_press(int keycode, t_param *param)
 	a = 0;
 
 	if (keycode == KEY_W)
-		param->y++;
+		move_up(param, param->map);
 	else if (keycode == KEY_S)
-		param->y--;
+		move_down(param, param->map);
 	else if (keycode == KEY_A)
-		param->x--;
+		move_left(param, param->map);
 	else if (keycode == KEY_D)
-		param->x++;
+		move_right(param, param->map);
 	else if (keycode == KEY_ESC)
 		exit (0);
-	printf("x: %d, y: %d\n", param->x, param->y); 
+	put_img(param->map, param);
+	param->map[param->ex][param->ey] = 'E';
+	mlx_put_image_to_window(param->mlx, param->win, param->img_portal, BIT * param->ey, BIT * param->ex);
+	mlx_put_image_to_window(param->mlx, param->win, param->img_pacman, BIT * param->y, BIT * param->x);
 	return (0);
 }
 
-void	hook(t_vars *vars, t_img *img, char map[][50])
+void	hook(t_param *param)
 {
-	t_param	param;
-
-	if (!img)
-		return ;
-	param_init(&param, map);
-	mlx_hook(vars->win, X_EVENT_KEY_RELEASE, 0, &key_press, &param);
+	find_portal(param, param->map);
+	mlx_hook(param->win, X_EVENT_KEY_RELEASE, 0, &key_press, param);
 }
