@@ -6,7 +6,7 @@
 #    By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/02 15:01:09 by junhyeop          #+#    #+#              #
-#    Updated: 2024/02/12 21:52:05 by junhyeop         ###   ########.fr        #
+#    Updated: 2024/02/13 21:13:43 by junhyeop         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,10 @@ NAME_BONUS = checker
 SRC_DIR = ./
 CHECKER_DIR = ./check
 
-SRC	= map_pars.c images.c hook.c
+SRC	= map_pars.c main.c hook.c move.c utils.c map_check.c map_check_utils.c
 
 LIBDIR = ./libft/
-LIBNAME = ft
+LIBNAME = ft 
 LIB = $(LIBDIR)lib$(LIBNAME).a
 INCDIRS = ./inc/
 
@@ -55,7 +55,7 @@ fclean: clean
 	$(MAKE) -C $(LIBDIR) fclean
 	${RM} $(NAME) $(NAME_BONUS)
 
-re: fclean bonus
+re: fclean all
 
 bonus: $(NAME_BONUS)
 
