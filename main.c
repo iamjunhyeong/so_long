@@ -6,79 +6,90 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 19:27:26 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/12 21:29:12 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/13 19:34:55 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-//함수 선언부
-void my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int prtimage();
-int exit_hook();
-int	key_hook(int keycode, t_vars *vars);
-
-// main function!
-int main()
+int main(void)
 {
-	prtimage();
+	t_param param;
+
+	param_init(&param);
+	set_map(param.map, &param);
+	put_img(param.map, &param);
+	hook(&param);
+	mlx_loop(param.mlx);
 	return (0);
 }
 
-
-void			my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	param_init(t_param *param)
 {
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	param->img_width = 1920;
+	param->img_height = 1080;
+	param->C = 0;
+	param->E = 0;
+	param->P = 0;
+	param->row = 0;
+	param->col = 0;
+	param->str = NULL;
+	param->x = 0;
+	param->y = 0;
+	param->move_cnt = 0;
+	param->mlx = mlx_init();
+	param->win = mlx_new_window(param->mlx, param->img_width, param->img_height, "Hellow World!");
+	param->img_black = mlx_xpm_file_to_image(param->mlx, "./images/black.xpm", &param->img_width, &param->img_height);
+	param->img_wall = mlx_xpm_file_to_image(param->mlx, "./images/wall.xpm", &param->img_width, &param->img_height);
+	param->img_food = mlx_xpm_file_to_image(param->mlx, "./images/pacdot_food.xpm", &param->img_width, &param->img_height);
+	param->img_portal = mlx_xpm_file_to_image(param->mlx, "./images/portal.xpm", &param->img_width, &param->img_height);
+	param->img_ghost = mlx_xpm_file_to_image(param->mlx, "./images/B/ghost_left1.xpm", &param->img_width, &param->img_height);
+	param->img_pacman = mlx_xpm_file_to_image(param->mlx, "./images/pac_open_right.xpm", &param->img_width, &param->img_height);
 }
 
-int prtimage()
+void	put_img(char map[][50], t_param *param)
 {
-	int		color;
-	t_vars vars;
-	t_data image;
+	int	i;
+	int	j;
 
-	int img_width = 1920;
-	int img_height = 1080;
-
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, img_width, img_height, "Hellow World!");
-	image.img = mlx_new_image(vars.mlx, img_width, img_height); // 이미지 객체 생성
-	image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian); // 이미지 주소 할당
-	for (int i = 0 ; i < img_height - 1 ; ++i)
+	i = 0;
+	while (i < 50)
 	{
-		for (int j = 0 ; j < img_width - 1; ++j)
+		j = 0;
+		while (j < 50)
 		{
-			double r = (double)(img_width - j) / (img_width - 1);
-			double g = (double)(i) / (img_height - 1);
-			double b = 1;
-			color = ((int)(255.999 * r) << 16) + ((int)(255.999 * g) << 8) + ((int)(255.999 * b));
-			my_mlx_pixel_put(&image, j, i, color);
-		}	
+			if (map[i][j] == '0')
+				mlx_put_image_to_window(param->mlx, param->win, param->img_black, BIT * j, BIT * i);
+			else if (map[i][j] == '1')
+				mlx_put_image_to_window(param->mlx, param->win, param->img_wall, BIT * j, BIT * i);
+			else if (map[i][j] == 'C')
+				mlx_put_image_to_window(param->mlx, param->win, param->img_food, BIT * j, BIT * i);
+			else if(map[i][j] == 'E')
+				mlx_put_image_to_window(param->mlx, param->win, param->img_portal, BIT * j, BIT * i);
+			else if (map[i][j] == 'P')			
+				mlx_put_image_to_window(param->mlx, param->win, param->img_pacman, BIT * j, BIT * i);
+			j++;
+		}
+		i++;
 	}
-	mlx_put_image_to_window(vars.mlx, vars.win, image.img, 0, 0);
-	mlx_key_hook(vars.win, key_hook, &vars); // esc key press event
-	mlx_hook(vars.win, 17, 0, exit_hook, 0); // close button press event
-	mlx_loop(vars.mlx);
-	return (0);
 }
 
+// #include <stdio.h>
+// void	print_map(char map[][50])
+// {
+// 	int i;
+// 	int j;
 
-// esc key press event
-int	key_hook(int keycode, t_vars *vars)
-{
-	if(keycode == 53)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		exit(0);
-	}
-	return (0);
-}
-
-// close button press event
-int exit_hook()
-{
-	exit(0);
-}
+// 	i = 0;
+// 	while (i < 50)
+// 	{
+// 		j = 0;
+// 		while (j < 50 && map[i][j] != -1)
+// 		{
+// 			printf("%d",map[i][j]);
+// 			j++;
+// 		}
+// 		printf("\n");
+// 		i++;
+// 	}
+// }
