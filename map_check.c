@@ -39,7 +39,6 @@ void	dfs(char visited[][50], t_param *param, t_head *head)
 	t_dfs	v;
 
 	dfs_init(&v);
-
 	add_new_node(head, param->x, param->y);
 	visited[param->x][param->y] = 1;
 	while (head->size)
@@ -62,6 +61,7 @@ void	dfs(char visited[][50], t_param *param, t_head *head)
 				v.i++;
 			}
 		}
+		free(v.tmp);
 	}
 }
 
@@ -99,5 +99,6 @@ int	check_map(char map[][50], t_param *param)
 	visited_init(visited, map);
 	dfs(visited, param, head);
 	check_visited(visited);
+	free(head);
 	return (1);
 }

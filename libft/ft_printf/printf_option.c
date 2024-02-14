@@ -42,8 +42,6 @@ int	ft_print_u(unsigned int u)
 	char	*str;
 	size_t	len;
 
-	if (u < 0)
-		return (-1);
 	str = ft_itoa_hex(u, 10, 0);
 	if (!str)
 		return (-1);

@@ -37,7 +37,7 @@ typedef struct s_dfs
 typedef struct s_head
 {
 	int				size;
-	struct s_stack *front;
+	struct s_stack *top;
 }	t_head;
 
 typedef struct s_param

@@ -22,32 +22,35 @@ void	add_new_node(t_head *head, int x, int y)
 		print_error(2);
 	new->x = x;
 	new->y = y;
-	new->next = NULL;
-	if (head->front == NULL)
+	if (head->top == NULL)
 	{
-		head->front = new;
-		head->size++;
-		return ;
+		new->next = NULL;
+		head->top = new;
 	}
-	tmp = head->front;
-	while (tmp)
+	else
 	{
-		if (tmp->next == NULL)
-			break ;
-		tmp = tmp->next;
+		tmp = head->top;
+		head->top = new;
+		new->next = tmp;
 	}
 	head->size++;
-	tmp->next = new;
 }
 
 t_stack	*stack_pop(t_head *head)
 {
 	t_stack	*tmp;
+	t_stack *pop;
 
-	tmp = head->front;
-	while (tmp->next)
-		tmp = tmp->next;
+	pop = head->top;
+	head->top = pop->next;
 	head->size--;
 	return (tmp);
+}
+
+void	freeall(t_head *head)
+{
+	if (!head)
+		return ;
+	free(head);
 }
 

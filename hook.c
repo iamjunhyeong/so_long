@@ -14,9 +14,6 @@
 
 int	key_press(int keycode, t_param *param)
 {
-	static int	a;
-	a = 0;
-
 	if (keycode == KEY_W)
 		move_up(param, param->map);
 	else if (keycode == KEY_S)

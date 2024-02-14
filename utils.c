@@ -78,7 +78,7 @@ t_head	*head_init()
 	tmp = (t_head *)malloc(sizeof(t_head));
 	if (!tmp)
 		return (NULL);
-	tmp->front = NULL;
 	tmp->size = 0;
+	tmp->top = NULL;
 	return (tmp);
 }
