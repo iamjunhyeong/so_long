@@ -6,37 +6,28 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:25:12 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/13 21:30:17 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:49:21 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	print_error(int type)
-{
-	if (type == 1)
-		ft_printf("Error\n");
-	else if (type == 2)
-		ft_printf("malloc Error\n");
-	exit(1);
-}
-
 void	create_map(char *s, char map[], t_param *param)
 {
-	if (ft_strlen(s) >= 50)
+	if (ft_strlen(s) >= 50 || ft_strlen(s) - 1 < 3)
 		print_error(1);
-	if (param->col != 0 && param->col != (int)ft_strlen(s))
+	if (param->col != (int)ft_strlen(s) - 1)
 		print_error(1);
 	while (*s)
 	{
 		if (*s == '\n' || *s == -1)
 			break ;
 		if (*s == 'C')
-			param->C++;
+			param->c++;
 		else if (*s == 'E')
-			param->E++;
+			param->e++;
 		else if (*s == 'P')
-			param->P++;
+			param->p++;
 		else if (*s != '0' && *s != '1')
 			print_error(1);
 		*map++ = *s++;
@@ -61,23 +52,30 @@ void	map_init(char map[][50])
 	}
 }
 
-void set_map(char map[][50], t_param *param)
+void	set_map(char map[][50], t_param *param)
 {
+
+	if (ft_strnstr(param->map_name, ".ber", ft_strlen(param->map_name)) == NULL)
+		print_error(1);
+	param->fd = open(param->map_name, O_RDONLY);
+	if (param->fd <= 0)
+		print_error(3);
 	map_init(map);
-	param->fd = open("map1.ber", O_RDONLY);
 	while (1)
 	{
 		param->str = get_next_line(param->fd);
 		if (param->str == NULL)
 			break ;
+		if (ft_strcmp(param->str, "\n") == 0)
+			continue ;
+		if (param->col == 0)
+			param->col = ft_strlen(param->str) - 1;
 		create_map(param->str, map[param->row], param);
 		param->row += 1;
 		if (param->row >= 50)
 			print_error(1);
 		free(param->str);
-	}
-	find_player(param, param->map);
-	find_portal(param, param->map);
-	if (!check_map(map, param)) 	// wall check, p check, etc..
+	}	
+	if (!check_map(map, param) || param->row < 3)
 		print_error(1);
 }

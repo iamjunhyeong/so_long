@@ -6,7 +6,7 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 17:43:00 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/13 20:39:45 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:58:15 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	key_press(int keycode, t_param *param)
 	param->map[param->ex][param->ey] = 'E';
 	mlx_put_image_to_window(param->mlx, param->win, param->img_portal, BIT * param->ey, BIT * param->ex);
 	mlx_put_image_to_window(param->mlx, param->win, param->img_pacman, BIT * param->y, BIT * param->x);
+	ft_printf("%d\n", param->move_cnt);
 	return (0);
 }
 

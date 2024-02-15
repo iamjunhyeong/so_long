@@ -6,17 +6,19 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 19:27:26 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/13 19:34:55 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:23:36 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int main(void)
+int main(int argc, char **argv)
 {
 	t_param param;
 
-	param_init(&param);
+	if (argc != 2)
+		print_error(1);
+	param_init(&param, argv[1]);
 	set_map(param.map, &param);
 	put_img(param.map, &param);
 	hook(&param);
@@ -24,13 +26,14 @@ int main(void)
 	return (0);
 }
 
-void	param_init(t_param *param)
+void	param_init(t_param *param, char *map)
 {
+	param->map_name = map;
 	param->img_width = 1920;
 	param->img_height = 1080;
-	param->C = 0;
-	param->E = 0;
-	param->P = 0;
+	param->c = 0;
+	param->e = 0;
+	param->p = 0;
 	param->row = 0;
 	param->col = 0;
 	param->str = NULL;
@@ -52,6 +55,7 @@ void	put_img(char map[][50], t_param *param)
 	int	i;
 	int	j;
 
+	mlx_clear_window(param->mlx, param->win);
 	i = 0;
 	while (i < 50)
 	{

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/15 16:20:58 by junhyeop          #+#    #+#             */
+/*   Updated: 2024/02/15 18:23:13 by junhyeop         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -37,13 +49,15 @@ typedef struct s_dfs
 typedef struct s_head
 {
 	int				size;
-	struct s_stack *top;
+	struct s_stack	*top;
 }	t_head;
 
 typedef struct s_param
 {
 	char	map[50][50];
+	char	*map_name;
 
+	int		line_len;
 	int		ex;
 	int		ey;
 	int		x;
@@ -52,11 +66,11 @@ typedef struct s_param
 	int		fd;
 	int		row;
 	int		col;
-	int		C;
-	int		E;
-	int		P;
+	int		c;
+	int		e;
+	int		p;
 	char	*str;
-
+	
 	void	*mlx;
 	void	*win;
 	void	*img_black;
@@ -71,7 +85,7 @@ typedef struct s_param
 }	t_param;
 
 int		check_map(char map[][50], t_param *param);
-void	param_init(t_param *param);
+void	param_init(t_param *param, char *map);
 void	map_init(char map[][50]);
 void	create_map(char *s, char map[], t_param *param);
 void	print_error(int type);
@@ -80,11 +94,11 @@ void	put_img(char map[][50], t_param *param);
 void	print_error(int type);
 
 void	check_visited(char visited[][50]);
-void	dfs(char visited[][50], t_param *param, t_head *head);
+void	dfs(char visited[][50], t_head *head);
 int		ind_check(int ind);
 t_stack	*stack_pop(t_head *head);
 void	add_new_node(t_head *head, int x, int y);
-t_head	*head_init();
+t_head	*head_init(void);
 void	visited_init(char visited[][50], char map[][50]);
 
 void	hook(t_param *param);

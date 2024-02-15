@@ -6,7 +6,7 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:04:28 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/13 22:23:47 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:44:13 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	add_new_node(t_head *head, int x, int y)
 {
-	t_stack *new;
-	t_stack *tmp;
+	t_stack	*new;
+	t_stack	*tmp;
 
 	new = (t_stack *)malloc(sizeof(t_stack));
 	if (!new)
@@ -38,13 +38,12 @@ void	add_new_node(t_head *head, int x, int y)
 
 t_stack	*stack_pop(t_head *head)
 {
-	t_stack	*tmp;
-	t_stack *pop;
+	t_stack	*pop;
 
 	pop = head->top;
 	head->top = pop->next;
 	head->size--;
-	return (tmp);
+	return (pop);
 }
 
 void	freeall(t_head *head)
