@@ -6,16 +6,27 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 20:09:35 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/13 22:03:26 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:51:13 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	print_error(int type)
+{
+	if (type == 1)
+		ft_putstr_fd("Error\n", 2);
+	else if (type == 2)
+		ft_putstr_fd("Error malloc\n", 2);
+	else if (type == 3)
+		ft_putstr_fd("Error read\n", 2);
+	exit(1);
+}
+
 void	find_portal(t_param *param, char map[][50])
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < 50)
@@ -33,8 +44,8 @@ void	find_portal(t_param *param, char map[][50])
 
 void	find_player(t_param *param, char map[][50])
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < 50)
@@ -52,8 +63,8 @@ void	find_player(t_param *param, char map[][50])
 
 void	visited_init(char visited[][50], char map[][50])
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < 50)
@@ -61,7 +72,7 @@ void	visited_init(char visited[][50], char map[][50])
 		j = 0;
 		while (j < 50)
 		{
-			if (map[i][j] != '0')
+			if (map[i][j] == '1' || map[i][j] == -1)
 				visited[i][j] = 1;
 			else
 				visited[i][j] = 0;
@@ -71,7 +82,7 @@ void	visited_init(char visited[][50], char map[][50])
 	}
 }
 
-t_head	*head_init()
+t_head	*head_init(void)
 {
 	t_head	*tmp;
 
