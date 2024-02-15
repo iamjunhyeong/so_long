@@ -6,7 +6,7 @@
 #    By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/02 15:01:09 by junhyeop          #+#    #+#              #
-#    Updated: 2024/02/13 21:13:43 by junhyeop         ###   ########.fr        #
+#    Updated: 2024/02/15 18:52:39 by junhyeop         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,11 +53,9 @@ clean:
 
 fclean: clean
 	$(MAKE) -C $(LIBDIR) fclean
-	${RM} $(NAME) $(NAME_BONUS)
+	${RM} $(NAME) 
 
 re: fclean all
-
-bonus: $(NAME_BONUS)
 
 .PHONY: all clean fclean re bonus
 
