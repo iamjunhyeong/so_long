@@ -6,34 +6,36 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 17:43:00 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/15 16:58:15 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/16 21:15:59 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	key_press(int keycode, t_param *param)
+int	key_press(int keycode, t_param *p)
 {
+	void	*mlx;
+
+	mlx = p->mlx;
 	if (keycode == KEY_W)
-		move_up(param, param->map);
+		move_up(p, p->map);
 	else if (keycode == KEY_S)
-		move_down(param, param->map);
+		move_down(p, p->map);
 	else if (keycode == KEY_A)
-		move_left(param, param->map);
+		move_left(p, p->map);
 	else if (keycode == KEY_D)
-		move_right(param, param->map);
+		move_right(p, p->map);
 	else if (keycode == KEY_ESC)
-		exit (0);
-	put_img(param->map, param);
-	param->map[param->ex][param->ey] = 'E';
-	mlx_put_image_to_window(param->mlx, param->win, param->img_portal, BIT * param->ey, BIT * param->ex);
-	mlx_put_image_to_window(param->mlx, param->win, param->img_pacman, BIT * param->y, BIT * param->x);
-	ft_printf("%d\n", param->move_cnt);
+		end_game(p);
+	put_img(p->map, p);
+	p->map[p->ex][p->ey] = 'E';
+	mlx_put_image_to_window(mlx, p->win, p->img_por, BIT * p->ey, BIT * p->ex);
+	mlx_put_image_to_window(mlx, p->win, p->img_pac, BIT * p->y, BIT * p->x);
 	return (0);
 }
 
-void	hook(t_param *param)
+void	hook(t_param *p)
 {
-	find_portal(param, param->map);
-	mlx_hook(param->win, X_EVENT_KEY_RELEASE, 0, &key_press, param);
+	find_portal(p, p->map);
+	mlx_hook(p->win, X_EVENT_KEY_RELEASE, 0, &key_press, p);
 }
