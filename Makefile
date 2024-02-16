@@ -6,7 +6,7 @@
 #    By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/16 22:38:22 by junhyeop          #+#    #+#              #
-#    Updated: 2024/02/16 22:49:01 by junhyeop         ###   ########.fr        #
+#    Updated: 2024/02/16 23:20:56 by junhyeop         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = so_long
 NAME_BONUS = so_long_bonus
 
 SRC_DIR = ./src
-BONUS_DIR = ./bonus
+BONUS_DIR = ./src_bonus
 
 SRC	= $(SRC_DIR)/map_pars.c $(SRC_DIR)/main.c $(SRC_DIR)/hook.c $(SRC_DIR)/move.c \
 		$(SRC_DIR)/utils.c $(SRC_DIR)/map_check.c $(SRC_DIR)/map_check_utils.c $(SRC_DIR)/images.c
