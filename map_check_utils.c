@@ -6,7 +6,7 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:04:28 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/15 17:44:13 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/16 20:56:32 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,3 @@ void	freeall(t_head *head)
 		return ;
 	free(head);
 }
-

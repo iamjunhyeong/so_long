@@ -6,7 +6,7 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:25:12 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/15 18:49:21 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/16 21:18:16 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	map_init(char map[][50])
 
 void	set_map(char map[][50], t_param *param)
 {
-
 	if (ft_strnstr(param->map_name, ".ber", ft_strlen(param->map_name)) == NULL)
 		print_error(1);
 	param->fd = open(param->map_name, O_RDONLY);
@@ -75,7 +74,15 @@ void	set_map(char map[][50], t_param *param)
 		if (param->row >= 50)
 			print_error(1);
 		free(param->str);
-	}	
+	}
 	if (!check_map(map, param) || param->row < 3)
 		print_error(1);
+	map_size_check(param);
+}
+
+void	map_size_check(t_param *p)
+{
+	p->img_w = p->col * BIT;
+	p->img_h = p->row * BIT ;
+	p->win = mlx_new_window(p->mlx, p->img_w, p->img_h, "so_long");
 }

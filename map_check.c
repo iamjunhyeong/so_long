@@ -6,7 +6,7 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 17:55:36 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/15 18:47:13 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:58:48 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	dfs(char visited[][50], t_head *head)
 	dfs_init(&v);
 	while (head->size)
 	{
-
 		v.i = 0;
 		v.tmp = stack_pop(head);
 		v.x = v.tmp->x;
@@ -73,7 +72,6 @@ void	check_visited(char visited[][50])
 		j = 0;
 		while (j < 50)
 		{
-			// ft_printf("%d", visited[i][j]);
 			if (!visited[i][j])
 				print_error(1);
 			j++;
