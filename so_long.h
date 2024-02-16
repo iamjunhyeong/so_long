@@ -6,7 +6,7 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:20:58 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/16 21:05:17 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/16 21:36:50 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void	finish_game(t_param *param);
 void	map_size_check(t_param *param);
 void	put_number(t_param *param);
 void	img_init(t_param *param);
+void	my_put_image(t_param *p, char c, int i, int j);
+void	*get_xpm_file(char *str, t_param *p);
 
 void	check_visited(char visited[][50]);
 void	dfs(char visited[][50], t_head *head);

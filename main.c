@@ -6,7 +6,7 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 19:27:26 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/16 21:12:02 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/16 21:38:10 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,9 @@ void	param_init(t_param *param, char *map)
 	param->move_cnt = 0;
 	param->mlx = mlx_init();
 	img_init(param);
+}
+
+void	*get_xpm_file(char *str, t_param *p)
+{
+	return (mlx_xpm_file_to_image(p->mlx, str, &p->img_w, &p->img_h));
 }
