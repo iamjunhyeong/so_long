@@ -6,7 +6,7 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:34:07 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/16 23:16:08 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/18 23:03:36 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	finish_game(t_param *param)
 void	move_left(t_param *p, char map[][50])
 {
 	char	*str;
-
 
 	if (p->move_cnt % 3 == 0)
 		str = "./img/pacman/pac_left.xpm";
@@ -46,7 +45,6 @@ void	move_left(t_param *p, char map[][50])
 void	move_right(t_param *p, char map[][50])
 {
 	char	*str;
-
 
 	if (p->move_cnt % 3 == 0)
 		str = "./img/pacman/pac_right.xpm";
