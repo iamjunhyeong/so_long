@@ -6,7 +6,7 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:20:58 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/16 22:49:29 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/19 20:47:37 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # define BIT						32
 # define PRESS_RED_BUTTON			17
 
-# include <math.h>
 # include <mlx.h>
 # include "../libft/libft.h"
 # include <stdlib.h>
