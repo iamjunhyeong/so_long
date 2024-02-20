@@ -6,7 +6,7 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:34:07 by junhyeop          #+#    #+#             */
-/*   Updated: 2024/02/16 22:51:25 by junhyeop         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:56:34 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	move_down(t_param *p, char map[][50])
 		return ;
 	if (map[p->x + 1][p->y] == 'C')
 		p->c--;
-	if (map[p->x + 1][p->y + 1] == 'E' && p->c == 0)
+	if (map[p->x + 1][p->y] == 'E' && p->c == 0)
 		finish_game(p);
 	map[p->x][p->y] = '0';
 	p->x += 1;
