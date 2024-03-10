@@ -1,5 +1,5 @@
-📖 사용법
-(( MAC OS 전용)) 
+# 📖 사용법
+> MAC OS 전용)
 1. make or make bonus 입력해서 컴파일
 2. ./so_long <maps/맵이름> or ./so_long_bonus <maps/맵이름>
 3. 방향키는 awsd, 종료 ESC 
