@@ -1,3 +1,9 @@
+📖 사용법
+(( MAC OS 전용)) 
+1. make or make bonus 입력해서 컴파일
+2. ./so_long <maps/맵이름> or ./so_long_bonus <maps/맵이름>
+3. 방향키는 awsd, 종료 ESC 
+---
 <img width="827" alt="Screen Shot 2024-02-16 at 11 24 12 PM" src="https://github.com/iamjunhyeong/so_long/assets/115024272/e6f7ecfb-bf7d-4296-af70-86c87c89619a">
 
 # **So Long**
